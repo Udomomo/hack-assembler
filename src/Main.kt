@@ -1,3 +1,5 @@
+import instruction.InstructionType
+import parser.Parser
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.system.exitProcess
@@ -22,7 +24,35 @@ fun main(args: Array<String>) {
     val reader = Files.newBufferedReader(inputPath)
     val writer = Files.newBufferedReader(outputPath)
     reader.use {
-        writer.use {
+        val parser = Parser(reader)
+        while (parser.hasMoreLines()) {
+            parser.advance()
+            val instructionType = parser.instructionType()
+            printInstruction(parser, instructionType)
         }
+    }
+}
+
+/**
+ * デバッグ用にParserの結果を出力する。
+ */
+private fun printInstruction(
+    parser: Parser,
+    instructionType: InstructionType,
+) {
+    when (instructionType) {
+        InstructionType.A_INSTRUCTION -> {
+            println("Type A | Symbol=${parser.symbol()}")
+        }
+
+        InstructionType.L_INSTRUCTION -> {
+            println("Type L | Symbol=${parser.symbol()}")
+        }
+
+        InstructionType.C_INSTRUCTION -> {
+            println("Type C | dest=${parser.dest()}, comp=${parser.comp()}, jump=${parser.jump()}")
+        }
+
+        InstructionType.EMPTY -> {}
     }
 }
