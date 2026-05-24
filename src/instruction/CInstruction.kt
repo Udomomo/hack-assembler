@@ -7,22 +7,20 @@ class CInstruction private constructor(
 ) : Instruction {
     companion object {
         fun from(line: String): CInstruction {
-            val trimmed = line.filterNot { it.isWhitespace() }
-
-            val eqIndex = trimmed.indexOf('=')
-            val semiIndex = trimmed.indexOf(';')
+            val eqIndex = line.indexOf('=')
+            val semiIndex = line.indexOf(';')
 
             // ;よりも=が後にある場合は不正とする
             if (eqIndex >= 0 && semiIndex >= 0 && eqIndex > semiIndex) {
-                throw IllegalArgumentException("Invalid C_Instruction | currentLine=$trimmed")
+                throw IllegalArgumentException("Invalid C_Instruction | currentLine=$line")
             }
 
-            val dest = if (eqIndex >= 0) trimmed.take(eqIndex) else null
-            val jump = if (semiIndex >= 0) trimmed.substring(semiIndex + 1) else null
+            val dest = if (eqIndex >= 0) line.take(eqIndex) else null
+            val jump = if (semiIndex >= 0) line.substring(semiIndex + 1) else null
 
             val compStartIndex = if (eqIndex >= 0) eqIndex + 1 else 0
-            val compEndIndex = if (semiIndex >= 0) semiIndex else trimmed.length
-            val comp = trimmed.substring(compStartIndex, compEndIndex)
+            val compEndIndex = if (semiIndex >= 0) semiIndex else line.length
+            val comp = line.substring(compStartIndex, compEndIndex)
 
             return CInstruction(dest, comp, jump)
         }
