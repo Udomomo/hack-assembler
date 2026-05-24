@@ -2,7 +2,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.system.exitProcess
 
-fun main(args: List<String>) {
+fun main(args: Array<String>) {
     if (args.size != 1) {
         println("Usage: java -jar Main.jar <path to .asm file>")
         exitProcess(1)
