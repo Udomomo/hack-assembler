@@ -5,8 +5,8 @@ class LInstruction private constructor(
 ) : Instruction {
     companion object {
         fun from(line: String): LInstruction {
-            val start = line.indexOf("（") + 1
-            val end = line.indexOf("）")
+            val start = line.indexOf("(") + 1
+            val end = line.indexOf(")")
 
             val symbol =
                 if (start in 1..<end) {
