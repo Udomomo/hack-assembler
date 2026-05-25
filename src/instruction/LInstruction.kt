@@ -1,7 +1,7 @@
 package instruction
 
 class LInstruction private constructor(
-    val symbol: String,
+    private val symbol: String,
 ) : Instruction {
     companion object {
         fun from(line: String): LInstruction {
