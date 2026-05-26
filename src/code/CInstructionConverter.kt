@@ -10,7 +10,7 @@ object CInstructionConverter {
         val comp = compMap[instruction.comp()]
         val jump = jumpMap[instruction.jump()]
 
-        return "$opCode$ignoreCode${dest}${comp}$jump"
+        return "$opCode$ignoreCode$comp$dest$jump"
     }
 
     private val destMap: Map<String?, String> =
