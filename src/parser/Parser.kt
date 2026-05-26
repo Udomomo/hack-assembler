@@ -18,7 +18,8 @@ class Parser(
 ) {
     private val bufferedReader = reader.buffered()
 
-    private var currentInstruction = InstructionFactory.from("")
+    var currentInstruction = InstructionFactory.from("")
+        private set
 
     // 次の行の存在確認のため先読みしておく。
     private var nextLine: String? = bufferedReader.readLine()?.trim()

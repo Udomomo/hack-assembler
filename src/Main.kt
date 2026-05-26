@@ -1,3 +1,4 @@
+import code.Converter
 import instruction.InstructionType
 import parser.Parser
 import java.nio.file.Files
@@ -18,17 +19,30 @@ fun main(args: Array<String>) {
         exitProcess(1)
     }
 
-    val outputFileName = inputFileName.replace("\\.([^.]+)$", ".hack")
+    val outputFileName = inputFileName.substringBeforeLast(".") + ".hack"
     val outputPath = inputPath.resolveSibling(outputFileName)
 
     val reader = Files.newBufferedReader(inputPath)
-    val writer = Files.newBufferedReader(outputPath)
+    val writer = Files.newBufferedWriter(outputPath)
+
+    var hasWrittenAnyLine = false
     reader.use {
-        val parser = Parser(reader)
-        while (parser.hasMoreLines()) {
-            parser.advance()
-            val instructionType = parser.instructionType()
-            printInstruction(parser, instructionType)
+        writer.use {
+            val parser = Parser(reader)
+            while (parser.hasMoreLines()) {
+                parser.advance()
+                val instructionType = parser.instructionType()
+                printInstruction(parser, instructionType)
+
+                val result = Converter(parser.currentInstruction).convert()
+                if (result != null) {
+                    if (hasWrittenAnyLine) {
+                        writer.newLine()
+                    }
+                    writer.write(result)
+                    hasWrittenAnyLine = true
+                }
+            }
         }
     }
 }
