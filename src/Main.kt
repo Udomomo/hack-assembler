@@ -36,6 +36,7 @@ fun main(args: Array<String>) {
 
                 val result = Converter(parser.currentInstruction).convert()
                 if (result != null) {
+                    // 最後の行に改行を入れないようにするため、「1行目以外は事前に改行を入れる」方式にしている。
                     if (hasWrittenAnyLine) {
                         writer.newLine()
                     }
