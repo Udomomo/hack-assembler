@@ -17,11 +17,12 @@ object AInstructionConverter {
             symbol.toIntOrNull()
                 ?: reservedSymbols[symbol]
 
-        return address?.toString(radix = 2)
+        return address?.toString(radix = 2)?.padStart(15, '0')
     }
 
     private val reservedSymbols: Map<String, Int> =
         mapOf(
+            "R0" to 0,
             "R1" to 1,
             "R2" to 2,
             "R3" to 3,
