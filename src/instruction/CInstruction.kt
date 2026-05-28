@@ -1,9 +1,9 @@
 package instruction
 
 class CInstruction private constructor(
-    private val dest: String?,
-    private val comp: String,
-    private val jump: String?,
+    val dest: String?,
+    val comp: String,
+    val jump: String?,
 ) : Instruction {
     companion object {
         fun from(line: String): CInstruction {
@@ -26,11 +26,5 @@ class CInstruction private constructor(
         }
     }
 
-    override fun dest(): String? = dest
-
-    override fun comp(): String = comp
-
-    override fun jump(): String? = jump
-
-    override fun symbol(): String = throw UnsupportedOperationException()
+    override fun toString() = "Type C | dest=$dest, comp=$comp, jump=$jump"
 }

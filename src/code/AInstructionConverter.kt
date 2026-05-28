@@ -6,7 +6,7 @@ object AInstructionConverter {
     fun convert(instruction: AInstruction): String {
         val opCode = "0"
         val address =
-            toAddress(instruction.symbol())
+            toAddress(instruction.symbol)
                 ?: throw IllegalArgumentException("invalid symbol | aInstruction: $instruction")
 
         return "$opCode$address"

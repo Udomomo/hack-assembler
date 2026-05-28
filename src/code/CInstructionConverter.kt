@@ -6,9 +6,9 @@ object CInstructionConverter {
     fun convert(instruction: CInstruction): String {
         val opCode = "1"
         val ignoreCode = "11"
-        val dest = destMap[instruction.dest()]
-        val comp = compMap[instruction.comp()]
-        val jump = jumpMap[instruction.jump()]
+        val dest = destMap[instruction.dest]
+        val comp = compMap[instruction.comp]
+        val jump = jumpMap[instruction.jump]
 
         return "$opCode$ignoreCode$comp$dest$jump"
     }

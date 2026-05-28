@@ -1,7 +1,7 @@
 package instruction
 
 class LInstruction private constructor(
-    private val symbol: String,
+    val symbol: String,
 ) : Instruction {
     companion object {
         fun from(line: String): LInstruction {
@@ -19,11 +19,5 @@ class LInstruction private constructor(
         }
     }
 
-    override fun symbol() = symbol
-
-    override fun dest(): String = throw UnsupportedOperationException()
-
-    override fun comp(): String = throw UnsupportedOperationException()
-
-    override fun jump(): String = throw UnsupportedOperationException()
+    override fun toString() = "Type L | Symbol=$symbol"
 }

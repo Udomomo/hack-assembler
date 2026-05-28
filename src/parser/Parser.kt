@@ -37,34 +37,4 @@ class Parser(
         currentInstruction = InstructionFactory.from(nextLine!!)
         nextLine = bufferedReader.readLine()?.trim()
     }
-
-    fun instructionType() =
-        when (currentInstruction) {
-            is EmptyInstruction -> InstructionType.EMPTY
-            is AInstruction -> InstructionType.A_INSTRUCTION
-            is LInstruction -> InstructionType.L_INSTRUCTION
-            is CInstruction -> InstructionType.C_INSTRUCTION
-        }
-
-    /**
-     * 命令に含まれるシンボルを取り出す。A命令, L命令の場合のみ利用可。
-     */
-    fun symbol(): String = currentInstruction.symbol()
-
-    /**
-     * 命令のdest部分を取り出す。dest部分がない場合はnullを返す。
-     * C命令の場合のみ利用可。
-     */
-    fun dest(): String? = currentInstruction.dest()
-
-    /**
-     * 命令のcomp部分を取り出す。C命令の場合のみ利用可。
-     */
-    fun comp(): String = currentInstruction.comp()
-
-    /**
-     * 命令のjump部分を取り出す。jump部分がない場合はnullを返す。
-     * C命令の場合のみ利用可。
-     */
-    fun jump(): String? = currentInstruction.jump()
 }

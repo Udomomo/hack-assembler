@@ -1,5 +1,5 @@
 import code.Converter
-import instruction.InstructionType
+import instruction.EmptyInstruction
 import parser.Parser
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -31,8 +31,9 @@ fun main(args: Array<String>) {
             val parser = Parser(reader)
             while (parser.hasMoreLines()) {
                 parser.advance()
-                val instructionType = parser.instructionType()
-                printInstruction(parser, instructionType)
+                if (parser.currentInstruction !is EmptyInstruction) {
+                    println(parser.currentInstruction)
+                }
 
                 val result = Converter(parser.currentInstruction).convert()
                 if (result != null) {
@@ -45,29 +46,5 @@ fun main(args: Array<String>) {
                 }
             }
         }
-    }
-}
-
-/**
- * デバッグ用にParserの結果を出力する。
- */
-private fun printInstruction(
-    parser: Parser,
-    instructionType: InstructionType,
-) {
-    when (instructionType) {
-        InstructionType.A_INSTRUCTION -> {
-            println("Type A | Symbol=${parser.symbol()}")
-        }
-
-        InstructionType.L_INSTRUCTION -> {
-            println("Type L | Symbol=${parser.symbol()}")
-        }
-
-        InstructionType.C_INSTRUCTION -> {
-            println("Type C | dest=${parser.dest()}, comp=${parser.comp()}, jump=${parser.jump()}")
-        }
-
-        InstructionType.EMPTY -> {}
     }
 }
