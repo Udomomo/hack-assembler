@@ -19,5 +19,7 @@ class LInstruction private constructor(
         }
     }
 
+    private fun symbol() = symbol
+
     override fun toString() = "Type L | Symbol=$symbol"
 }

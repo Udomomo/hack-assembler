@@ -1,6 +1,7 @@
 import code.Converter
 import instruction.EmptyInstruction
 import parser.Parser
+import symbol.SymbolTable
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.system.exitProcess
@@ -21,6 +22,17 @@ fun main(args: Array<String>) {
 
     val outputFileName = inputFileName.substringBeforeLast(".") + ".hack"
     val outputPath = inputPath.resolveSibling(outputFileName)
+
+    val symbolReader = Files.newBufferedReader(inputPath)
+    symbolReader.use {
+        val parser = Parser(symbolReader)
+        while (parser.hasMoreLines()) {
+            parser.advance()
+            SymbolTable.extractSymbol(parser.currentInstruction, parser.currentLineNumber)
+        }
+    }
+
+    println("Symbols: $SymbolTable")
 
     val reader = Files.newBufferedReader(inputPath)
     val writer = Files.newBufferedWriter(outputPath)

@@ -18,6 +18,8 @@ class Parser(
 ) {
     private val bufferedReader = reader.buffered()
 
+    // シンボルの解決に必要なので行番号を記録する。空行・コメント行・シンボルの行はカウントしない。
+    var currentLineNumber = -1
     var currentInstruction = InstructionFactory.from("")
         private set
 
@@ -35,6 +37,10 @@ class Parser(
         }
 
         currentInstruction = InstructionFactory.from(nextLine!!)
+
+        if (currentInstruction is AInstruction || currentInstruction is CInstruction) {
+            currentLineNumber++
+        }
         nextLine = bufferedReader.readLine()?.trim()
     }
 }
