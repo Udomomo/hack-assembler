@@ -23,6 +23,10 @@ object CInstructionConverter {
             "AM" to "101",
             "AD" to "110",
             "ADM" to "111",
+            // 以下2つは初版に掲載されていたdest。課題の.asmの一部にこの書き方が残っているため対応する。
+            // http://nand2tetris-questions-and-answers-forum.52.s1.nabble.com/pong-asm-strange-dest-syntax-td4036419.html
+            "MD" to "011",
+            "AMD" to "111",
         )
 
     private val compMap: Map<String, String> =
