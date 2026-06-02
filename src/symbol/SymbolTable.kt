@@ -22,6 +22,13 @@ object SymbolTable {
             "R13" to 13,
             "R14" to 14,
             "R15" to 15,
+            "SP" to 0,
+            "LCL" to 1,
+            "ARG" to 2,
+            "THIS" to 3,
+            "THAT" to 4,
+            "SCREEN" to 16384,
+            "KBD" to 24576,
         )
 
     var nextVariableAddress = 15 + 1
